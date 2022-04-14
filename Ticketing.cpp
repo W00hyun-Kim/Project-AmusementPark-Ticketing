@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <string.h>    // strcmp 함수가 선언된 헤더 파일
+#include <stdlib.h>
 
 int ticketType,ticketDayType,preferenceType,amount,price,resultPrice,isExit;
 
@@ -254,10 +255,17 @@ int main() {
 				
 			price = calPriceProcess(ticketType, ticketDayType, agegroup);
 			price = calDiscount(price, preferenceType);	
-			resultPrice = price;	//최종 
+			resultPrice = price*amount;	//최종 
 						
-			printf("가격은 %d원 입니다.\n",resultPrice*amount);
+			printf("가격은 %d원 입니다.\n",resultPrice);
 			printf("감사합니다.\n\n");
+			
+			
+//			 = {(ticketType==1)?"종합이용권":"파크이용권",(ticketDayType==1)?"주간권":"야간권", amount,
+//									agegroupConverter(agegroup),resultPrice,preferenceTypeConverter(preferenceType)};
+									
+			//{(ticketType==1)?"종합이용권":"파크이용권"};					
+			
 			
 			printf("계속 발권 하시겠습니까?\n");
 			printf("1. 티켓발권\n");
@@ -267,9 +275,7 @@ int main() {
 	} while(isExit == 1) ;
 	
 	printf("-----------------LOTTE WORLD---------------------");
-	 
 	
-
 	
 		
 	
