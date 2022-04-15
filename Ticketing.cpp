@@ -11,14 +11,14 @@ int reportPosition = 0;
 int orderList[100][6] = {0};
 
 //종합 이용권 가격 
-const int COMP_BABY_PRICE = 0,
+const int COMP_BABY_PRICE = 15000,
   		  COMP_ADULT_DAY_PRICE = 62000, COMP_ADULT_NIGHT_PRICE = 50000, 
 		  COMP_TEEN_DAY_PRICE = 54000, COMP_TEEN_NIGHT_PRICE = 43000,
 		  COMP_KID_DAY_PRICE = 47000, COMP_KID_NIGHT_PRICE = 36000,
 		  COMP_OLD_DAY_PRICE = 47000, COMP_OLD_NIGHT_PRICE = 36000;
 
 //파크 이용권 가격
-const int PARK_BABY_PRICE = 0,
+const int PARK_BABY_PRICE = 15000,
   		  PARK_ADULT_DAY_PRICE = 59000, PARK_ADULT_NIGHT_PRICE = 47000, 
 		  PARK_TEEN_DAY_PRICE = 52000, PARK_TEEN_NIGHT_PRICE = 41000,
 		  PARK_KID_DAY_PRICE = 46000, PARK_KID_NIGHT_PRICE = 35000,
@@ -42,7 +42,6 @@ const float DISABLE_DISCOUNT_RATE = 0.5, SOLDIER_DISCOUNT_RATE = 0.51,
 //최대 주문량
 const int MAX_COUNT = 10, MIN_COUNT =1;
 	
-
 
 int ageCal(char idNum[13]) {
 	int yearIndex, year, month, day, man;
@@ -106,7 +105,7 @@ int calPriceProcess(int ticketType, int ticketDayType, int agegroup) {
 		if(ticketDayType==1) {
 			switch(agegroup) {
 				case 1 : {	//baby
-					price = 0;
+					price = COMP_BABY_PRICE;
 					break;
 				}
 				case 2: {	//kids 
@@ -129,7 +128,7 @@ int calPriceProcess(int ticketType, int ticketDayType, int agegroup) {
 		} else if(ticketDayType==2) {	//night일때 
 			switch(agegroup) {
 				case 1 : {	//baby
-					price = 0;
+					price = COMP_BABY_PRICE;
 					break;
 				}
 				case 2: {	//kids 
@@ -154,7 +153,7 @@ int calPriceProcess(int ticketType, int ticketDayType, int agegroup) {
 		if(ticketDayType==1) {			//day 일 때 
 			switch(agegroup) {
 				case 1 : {	//baby
-					price = 0;
+					price = COMP_BABY_PRICE;
 					break;
 				}
 				case 2: {	//kids 
@@ -177,7 +176,7 @@ int calPriceProcess(int ticketType, int ticketDayType, int agegroup) {
 		} else if(ticketDayType==2) {	//night일때 
 			switch(agegroup) {
 				case 1 : {	//baby
-					price = 0;
+					price = COMP_BABY_PRICE;
 					break;
 				}
 				case 2: {	//kids 
@@ -223,7 +222,7 @@ int calDiscount(int price, int preferenceType) {
 
 char *preferenceTypeConverter(int preferenceType) {
 	
-	char* prefer[6] = {"우대적용 없음","장애인 우대적용","국가유공자 우대적용","다자녀 우대적용","임산부 우대적용","휴가장병 우대적용"};	
+	char* prefer[6] = {"우대적용 없음","장애인 우대적용","국가유공자 우대적용","휴가장병 우대적용","임산부 우대적용","다자녀 우대적용"};	
 	return prefer[preferenceType-1];
 	
 }
@@ -233,102 +232,121 @@ char *agegroupConverter(int agegroup) {
 	return age[agegroup-1];
 }
 
-void saveOrderList(int ticketType, int ticketDayType, int agegroup, int amount, int priceResult, int preferenceType, int *position, int (*orderList)[6]) {
-	orderList[*position][0] = ticketType;
-	orderList[*position][1] = ticketDayType;
-	orderList[*position][2] = agegroup;
-	orderList[*position][3] = amount;
-	orderList[*position][4] = priceResult;
-	orderList[*position][5] = preferenceType;
-	(*position)++;
-} 
-
 
 int main() {
+	int orderCount = 0;
+	int newOrderCount = 1;
 	
-	do {			
-		while(true) {
+	while(newOrderCount==1) {
+		int orderCount = 0;
+		do {	
 			
-			printf("이용권 타입을 선택하세요.\n");
-			printf("1. 종합이용권\n");
-			printf("2. 파크이용권\n>> ");
-			scanf("%d",&ticketType);
+				while(true) {
 			
-			printf("권종을 선택하세요.\n");
-			printf("1. 주간권\n");
-			printf("2. 야간권\n>> "); 
-			scanf("%d",&ticketDayType);
-				
-			printf("주민번호를 입력하세요.\n>> ");
-			scanf("%s", num);	
-			int age = ageCal(num);
-			int agegroup = calAgeGroup(age);	
-			
-			printf("몇개를 주문하시겠습니까?(최대 10개)\n>> ");
-			scanf("%d",&amount);
-			
+					printf("이용권 타입을 선택하세요.\n");
+					printf("1. 종합이용권\n");
+					printf("2. 파크이용권\n>> ");
+					scanf("%d",&ticketType);
+					printf("\n");
+					
+					printf("권종을 선택하세요.\n");
+					printf("1. 주간권(1Day)\n");
+					printf("2. 야간권(After4)\n>> "); 
+					scanf("%d",&ticketDayType);
+					printf("\n");
 						
-			printf("우대사항을 선택하세요.\n");
-			printf("1. 없음(나이 우대는 자동 처리))\n");
-			printf("2. 장애인\n"); 
-			printf("3. 국가유공자\n"); 
-			printf("4. 다자녀\n"); 
-			printf("5. 임산부\n"); 
-			printf("6. 휴가장병\n"); 
-			scanf("%d",&preferenceType);
-				
-			price = calPriceProcess(ticketType, ticketDayType, agegroup);
-			price = calDiscount(price, preferenceType);	
-			resultPrice = price*amount;	//최종 
-			
-			saveOrderList(ticketType, ticketDayType, agegroup, amount, resultPrice, preferenceType, &position, orderList);
-						
-			totalPrice = totalPrice + resultPrice;
-			
-			printf("가격은 %d원 입니다.\n",resultPrice);
-			printf("감사합니다.\n\n");
-							
+					printf("주민번호를 입력하세요.\n>> ");
+					scanf("%s", num);	
+					int age = ageCal(num);
+					int agegroup = calAgeGroup(age);	
+					printf("\n");
+					
+					printf("몇개를 주문하시겠습니까?(최대 10개)\n>> ");
+					scanf("%d",&amount);
+					printf("\n");
+					
+					if(ticketType==1) {
+						printf("우대사항을 선택하세요.\n");
+						printf("1. 없음(나이 우대는 자동 처리))\n");
+						printf("2. 장애인\n"); 
+						printf("3. 국가유공자\n"); 
+						printf("4. 휴가장병\n"); 
+						printf("5. 임산부\n"); 
+						printf("6. 다둥이행복카드 소지자\n"); 
+						scanf("%d",&preferenceType);
+						printf("\n");
 		
-			printf("계속 발권 하시겠습니까?\n");
-			printf("1. 티켓발권\n");
-			printf("2. 종료\n>> ");
-			scanf("%d", &isExit);		
+					} else if(ticketType==2) {
+						printf("우대사항을 선택하세요.\n");
+						printf("1. 없음(나이 우대는 자동 처리))\n");
+						printf("2. 장애인\n"); 
+						printf("3. 국가유공자\n"); 
+						printf("4. 휴가장병\n"); 
+						scanf("%d",&preferenceType);
+						printf("\n");				
+					}
+								
+									
+					price = calPriceProcess(ticketType, ticketDayType, agegroup);
+					price = calDiscount(price, preferenceType);	
+					resultPrice = price*amount;	//최종 
+								
+					orderList[orderCount][0] = ticketType;
+					orderList[orderCount][1] = ticketDayType;
+					orderList[orderCount][2] = agegroup;
+					orderList[orderCount][3] = amount;
+					orderList[orderCount][4] = resultPrice;
+					orderList[orderCount][5] = preferenceType;
+					orderCount++;
+														
+					totalPrice = totalPrice + resultPrice;
+					
+					printf("가격은 %d원 입니다.\n",resultPrice);
+					printf("감사합니다.\n\n");
+									
+				
+					printf("계속 발권 하시겠습니까?\n");
+					printf("1. 티켓발권\n");
+					printf("2. 종료\n>> ");
+					scanf("%d", &isExit);	
+					printf("\n");
+						
+					if(isExit==2) {
+						printf("발권을 종료합니다. 감사합니다.\n\n");	
+						break;
+					}
+				}
+			} while(isExit == 1) ;
 			
-			if(isExit==2) {
-				printf("발권을 종료합니다. 감사합니다.\n\n");				
+			printf("--------------------**************************-----------------------\n");	
+			printf("--------------------***L O T T E  W O R L D***-----------------------\n");
+			printf("--------------------**************************-----------------------\n");
+			printf("  이 용 권    권 종     신 분    개 수    가 격     할 인 적 용   \n");
+			printf("---------------------------------------------------------------------\n");
+			
+//			printf("%d,%d,%d,%d,%d,%d\n",orderList[0][0],orderList[0][1],orderList[0][2],orderList[0][3],orderList[0][4],orderList[0][5]);
+//			printf("%d,%d,%d,%d,%d,%d\n",orderList[1][0],orderList[1][1],orderList[1][2],orderList[1][3],orderList[1][4],orderList[1][5]);
+			
+			for(int index=0; index < orderCount; index ++) {	
+				printf(" %5s ",(orderList[index][0]==1)?"종합이용권":"파크이용권");					
+				printf(" %5s ",(orderList[index][1]==1)?"주간권":"야간권");					
+				printf(" %7s ",agegroupConverter(orderList[index][2]));		
+				printf("%6d개 ", orderList[index][3]);		
+				printf("%8d원 ",orderList[index][4]);		
+				printf(" %10s\n",preferenceTypeConverter(orderList[index][5]));
+			}
+			
+			printf("\n");
+			printf("입장료 총액은 %d원입니다. \n", totalPrice);	
+			totalPrice = 0;	
+			printf("-----------------------------------------------------------------\n");
+			printf("계속 진행(1: 새로운 주문, 2: 프로그램 종료)\n>> ");
+			scanf("%d",&newOrderCount);
+			printf("\n");
+			if(newOrderCount==2) {
 				break;
 			}
-		}
-	} while(isExit == 1) ;
-	printf("------------------**************************---------------------\n");	
-	printf("------------------***L O T T E  W O R L D***---------------------\n");
-	printf("------------------**************************---------------------\n");
-	printf("  이 용 권    권 종     신 분    갯 수    가 격     할 인 적 용   \n");
-	printf("-----------------------------------------------------------------\n");
-
-	for(int index=0; index < position; index ++) {
-	
-		if(orderList[index][0]) {
-			printf(" %5s ",(ticketType==1)?"종합이용권":"파크이용권");			
-		}
-		if(orderList[index][1]) {
-			printf(" %5s ",(ticketDayType==1)?"주간권":"야간권");			
-		}
-		if(orderList[index][2]) {
-			int age = orderList[index][2];
-			printf(" %7s ",agegroupConverter(age));
-		}
-		if(orderList[index][3]) {
-			printf("%6d개 ", amount);
-		}
-		if(orderList[index][4]) {
-			printf("%8d원 ",orderList[index][4]);
-		}
-		if(orderList[index][5]) {
-			printf(" %10s\n",preferenceTypeConverter(preferenceType));
-		}
 	}
 	
-		
-	
+				
 }
