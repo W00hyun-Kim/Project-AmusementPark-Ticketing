@@ -27,7 +27,7 @@ const int PARK_BABY_PRICE = 15000,
 //ID 번호 분석
 char num[13];
 
-const int OLD_GENERATION = 1900, NEW_GENERATION = 2000,
+const int OLD_GENERATION = 1900, NEW_GENERATION = 2000;
 			  
 //나이에 따른 범위 
 const int MAX_BABY = 2, MIN_KIDS = 3, MIN_TEEN =13, MIN_ADULT =19,
@@ -37,7 +37,7 @@ const int MAX_BABY = 2, MIN_KIDS = 3, MIN_TEEN =13, MIN_ADULT =19,
 const float DISABLE_DISCOUNT_RATE = 0.5, SOLDIER_DISCOUNT_RATE = 0.51,
 			MULTICHILD_DISCOUNT_RATE = 0.7, MERIT_DISCOUNT_RATE = 0.5,
 			PREGNANT_DISCOUNT_RATE = 0.5;
-	
+
 //최대 주문량
 const int MAX_COUNT = 10, MIN_COUNT =1;
 	
@@ -224,7 +224,7 @@ void selectPreference_COMP() {
 			printf("3. 국가유공자\n"); 
 			printf("4. 휴가장병\n"); 
 			printf("5. 임산부\n"); 
-			printf("6. 다둥이행복카드 소지자\n"); 
+			printf("6. 다둥이행복카드 소지자\n>>"); 
 			scanf("%d",&preferenceType);
 			printf("\n");
 			
@@ -240,7 +240,7 @@ void selectPreference_PARK() {
 			printf("1. 없음(나이 우대는 자동 처리))\n");
 			printf("2. 장애인\n"); 
 			printf("3. 국가유공자\n"); 
-			printf("4. 휴가장병\n"); 
+			printf("4. 휴가장병\n>>"); 
 			scanf("%d",&preferenceType);
 			printf("\n");
 			
