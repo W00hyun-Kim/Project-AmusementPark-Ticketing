@@ -28,7 +28,6 @@ const int PARK_BABY_PRICE = 15000,
 char num[13];
 
 const int OLD_GENERATION = 1900, NEW_GENERATION = 2000,
-		  MALE_OLD = 1, FEMALE_OLD = 2, MALE_NEW = 3, FEMALE_NEW = 4;
 			  
 //나이에 따른 범위 
 const int MAX_BABY = 2, MIN_KIDS = 3, MIN_TEEN =13, MIN_ADULT =19,
@@ -52,9 +51,9 @@ int ageCal(char idNum[13]) {
 	//주민등록번호 앞 두자리(연도) 
 	yearIndex = (idNum[0]-48)*10 + (idNum[1]-48);
 	if(yearIndex <=22) {
-		year = 2000 + yearIndex;
+		year = NEW_GENERATION + yearIndex;
 	} else {
-		year = 1900 + yearIndex ; 
+		year = OLD_GENERATION + yearIndex ; 
 	}		
 	
 	//기준 나이 
