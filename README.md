@@ -2,15 +2,6 @@
 
 > 구매할 입장권의 종류 및 우대사항을 선택하면 해당 요건이 반영된 최종 가격을 출력해주는 프로그램입니다.
 
-
-
-## 사용 예제
-
-스크린 샷과 코드 예제를 통해 사용 방법을 자세히 설명합니다.
-
-
-
-
 ## 주요 기능
 
 * 구매할 입장권 종류와 주민등록번호를 입력하면 그에 맞는 가격을 출력한다.
@@ -20,6 +11,16 @@
     * 추가: `oneRoundBill()` 메서드 추가
 * 최종적으로 결제될 가격, 선택사항, 우대사항을 출력한다.
     * 추가: `oneRoundBill` 메서드 호출 시 welcome to lotte world 추가
+
+## 사용 예제
+
+스크린 샷과 코드 예제를 통해 사용 방법을 자세히 설명합니다.
+
+![c1](https://user-images.githubusercontent.com/95575122/163767319-d34a4539-7335-4948-9867-7d8eb24620cd.PNG)
+
+![c2](https://user-images.githubusercontent.com/95575122/163767325-bdb79dac-da62-4b1a-8b5a-46c3901f323f.PNG)
+
+![c3](https://user-images.githubusercontent.com/95575122/163767330-f2f0f4e6-2425-4ce8-9c8b-a2da4b0658be.PNG)
 
 
 ## 정보
