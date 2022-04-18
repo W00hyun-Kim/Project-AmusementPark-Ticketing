@@ -16,11 +16,8 @@
 
 스크린 샷과 코드 예제를 통해 사용 방법을 자세히 설명합니다.
 
-![c1](https://user-images.githubusercontent.com/95575122/163767319-d34a4539-7335-4948-9867-7d8eb24620cd.PNG)
+![Result](https://user-images.githubusercontent.com/95575122/163767762-0ad8691f-ec4b-4d5e-9b09-8de1c79bc5b7.PNG)
 
-![c2](https://user-images.githubusercontent.com/95575122/163767325-bdb79dac-da62-4b1a-8b5a-46c3901f323f.PNG)
-
-![c3](https://user-images.githubusercontent.com/95575122/163767330-f2f0f4e6-2425-4ce8-9c8b-a2da4b0658be.PNG)
 
 
 ## 정보
